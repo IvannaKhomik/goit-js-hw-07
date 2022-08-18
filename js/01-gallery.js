@@ -31,19 +31,21 @@ function OnClickModalOpen(e) {
   if (!isGalleryLink) {
     return;
   }
+  const OnClickModalClose = (e) => {
+    if (e.key === "Escape") {
+      instance.close();
+    }
+    return;
+  };
   const instance = basicLightbox.create(
     `
 	<img src="${e.target.dataset.source}">`,
     {
       onShow: (instance) => {
-        galleryEl.addEventListener("keydown", OnClickModalClose);
-        function OnClickModalClose(e) {
-          if (e.key === "Escape") {
-            instance.close();
-            galleryEl.removeEventListener("keydown", OnClickModalClose);
-          }
-          return;
-        }
+        document.addEventListener("keydown", OnClickModalClose);
+      },
+      onClose: (instance) => {
+        document.removeEventListener("keydown", OnClickModalClose);
       },
     }
   );
