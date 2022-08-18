@@ -16,21 +16,9 @@ function createGallery(galleryItems) {
 }
 galleryEl.insertAdjacentHTML("afterbegin", createGallery(galleryItems));
 
-galleryEl.addEventListener("click", OnClickModalOpen);
-
-function OnClickModalOpen(e) {
-  e.preventDefault();
-
-  const isGalleryLink = e.target.classList.contains("gallery__image");
-  console.log(isGalleryLink);
-  if (!isGalleryLink) {
-    return;
-  }
-  const gallery = new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionPosition: "bottom",
-    captionDelay: 250,
-    preloading: false,
-  });
-  gallery.open();
-}
+const gallery = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+  preloading: false,
+});
